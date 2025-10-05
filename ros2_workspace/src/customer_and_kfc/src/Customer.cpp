@@ -15,18 +15,18 @@ public:
         RCLCPP_INFO(this->get_logger(), "大家好,我是一个%s.",name.c_str());
 
         // 创建订阅者,订阅hamburger
-        sub_hamburger = this->create_subscription<std_msgs::msg::String>("hamburger", 10, std::bind(&CustomerNode::hamburger_callback, this, _1));
+        _sub_hamburger = this->create_subscription<std_msgs::msg::String>("hamburger", 10, std::bind(&CustomerNode::hamburger_callback, this, _1));
     }
 private:
     // 声明一个订阅者,用于订阅发出的汉堡
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr sub_hamburger;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr _sub_hamburger;
 
     // 汉堡订阅者回调函数
     void hamburger_callback(const std_msgs::msg::String::SharedPtr msg)
     {
         RCLCPP_INFO(this->get_logger(), "这是我吃的%s ", msg->data.c_str());
     }
-};
+}; 
 
 int main(int argc, char **argv)
 {
