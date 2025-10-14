@@ -10,6 +10,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
+include_directories(include/)
+
 add_executable(noise_signal_node src/noise_signal.cpp)
 ament_target_dependencies(noise_signal_node rclcpp std_msgs)
 
