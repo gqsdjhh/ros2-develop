@@ -13,11 +13,15 @@ find_package(geometry_msgs REQUIRED)
 include_directories(include/)
 
 add_executable(motor_simulator_node src/motor_simulator_node.cpp)
-
 ament_target_dependencies(motor_simulator_node rclcpp std_msgs geometry_msgs)
+
+add_executable(motor_pid_control_node src/motor_pid_control_node.cpp)
+ament_target_dependencies(motor_pid_control_node rclcpp std_msgs geometry_msgs)
+
 
 install(TARGETS
   motor_simulator_node
+  motor_pid_control_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
