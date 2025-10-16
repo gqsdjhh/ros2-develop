@@ -24,11 +24,9 @@ public:
     }
 
     double process(double input_value) override {
-        // 将新值存入缓冲区
         buffer[index] = input_value;
         index = (index + 1) % buffer_size;
 
-        // 排序并取中值
         auto sortedBuffer = buffer;
         std::sort(sortedBuffer.begin(), sortedBuffer.end());
 
@@ -47,9 +45,9 @@ public:
 
 class LowPassFilter : public Filter {
 private:
-    double alpha;      // 滤波系数 (0 < alpha <= 1)
-    double previous_output;  // 上一次的滤波结果
-    bool is_first;      // 是否是第一个数据
+    double alpha;      
+    double previous_output;  
+    bool is_first;      
 
 public:
     explicit LowPassFilter(double alpha = 0.3) 
@@ -86,7 +84,7 @@ private:
     std::vector<double> buffer;
     size_t buffer_size;
     size_t index;
-    double sum;        // 缓冲区总和，用于优化计算
+    double sum;        
 
 public:
     explicit MeanFilter(size_t buffer_size = 3) 
@@ -95,15 +93,12 @@ public:
     }
 
     double process(double input_value) override {
-        // 减去即将被替换的值
         sum -= buffer[index];
-        // 存入新值并加上它
         buffer[index] = input_value;
         sum += input_value;
-        // 更新索引
+
         index = (index + 1) % buffer_size;
 
-        // 返回平均值
         return sum / (double)buffer_size;
     }
 
